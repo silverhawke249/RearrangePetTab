@@ -1,0 +1,7 @@
+## Interface: 30400
+## Title: Rearrange Pet Tab
+## Author: Silverhawke
+## Notes: Rearranges the pet tab to a list form
+## Version: 1.0
+
+RearrangePetTab.lua
