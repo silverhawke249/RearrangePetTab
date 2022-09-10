@@ -5,18 +5,21 @@ local function setLabelColor()
 		local pFrame = _G["PetPaperDollFrameCompanionFrame"]
 		local hl, hr, ht, hb = thisButton:GetHitRectInsets()
 
-		-- This entry is currently active
-		if thisButton.active then
-			thisLabel:SetFontObject(GameFontNormalHugeBlue)
-		-- This entry is being moused over
-		elseif thisButton:IsMouseOver(-ht, -hb, -hl, -hr) then
-			thisLabel:SetFontObject(GameFontNormalHugeWhite)
-		-- This entry is selected
-		elseif thisButton.creatureID == (pFrame.mode == "CRITTER" and pFrame.idCritter or pFrame.idMount) then
-			thisLabel:SetFontObject(GameFontNormalHugeWhite)
-		-- Regular text
-		else
-			thisLabel:SetFontObject(GameFontNormalHuge)
+		-- Lua error guard (why does Lua have no `continue` statement?)
+		if thisLabel ~= nil then
+			-- This entry is currently active
+			if thisButton.active then
+				thisLabel:SetFontObject(GameFontNormalHugeBlue)
+			-- This entry is being moused over
+			elseif thisButton:IsMouseOver(-ht, -hb, -hl, -hr) then
+				thisLabel:SetFontObject(GameFontNormalHugeWhite)
+			-- This entry is selected
+			elseif thisButton.creatureID == (pFrame.mode == "CRITTER" and pFrame.idCritter or pFrame.idMount) then
+				thisLabel:SetFontObject(GameFontNormalHugeWhite)
+			-- Regular text
+			else
+				thisLabel:SetFontObject(GameFontNormalHuge)
+			end
 		end
 	end
 end
@@ -113,7 +116,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 		topRight:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 255, 0)
 		bottomLeft:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 0, -255)
 		bottomRight:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 255, -255)
-		
+
 		-- Why is it slightly off?
 		CompanionPageNumber:SetPoint("CENTER", PetPaperDollFrameCompanionFrame, "CENTER", -13, -158)
 	else
