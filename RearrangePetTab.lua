@@ -48,6 +48,14 @@ local function setButtonText()
 	setLabelColor()
 end
 
+local function updateModelFrame()
+	if not RearrangePetTab_Settings.showPreview then
+		CompanionModelFrame:Hide()
+	else
+		CompanionModelFrame:Show()
+	end
+end
+
 local eventHandler = {}
 eventHandler.ADDON_LOADED = function(name)
 	if name ~= "RearrangePetTab" then return end
@@ -62,11 +70,12 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	-- Rearrange UI elements
 	CompanionSummonButton:Hide()
 	CompanionSelectedName:Hide()
-	for i = 1, PetPaperDollFrameCompanionFrame:GetNumRegions() do
+	for i = PetPaperDollFrameCompanionFrame:GetNumRegions(), 1, -1 do
 		local region = select(i, PetPaperDollFrameCompanionFrame:GetRegions())
 		if (region:GetObjectType() == "Texture") then
 			if region:GetPoint(1) == "CENTER" then
 				region:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
+				region:SetParent(CompanionModelFrame)
 			else
 				region:Hide()
 			end
@@ -74,6 +83,25 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	end
 	CompanionModelFrame:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 370, -114)
 	CompanionModelFrameRotateLeftButton:SetPoint("TOPLEFT", CompanionModelFrame, "TOPLEFT", -3, 25)
+
+	-- Introduce check button
+	local checkButton = CreateFrame(
+		"CheckButton",
+		"CompanionModelCheckButton",
+		PetPaperDollFrameCompanionFrame,
+		"ChatConfigCheckButtonTemplate"
+	)
+	checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -50)
+	checkButton:SetChecked(RearrangePetTab_Settings.showPreview)
+	local checkButtonText = _G["CompanionModelCheckButtonText"]
+	checkButtonText:SetText("Preview")
+	checkButton:SetScript("OnClick", function()
+		RearrangePetTab_Settings.showPreview = not RearrangePetTab_Settings.showPreview
+		updateModelFrame()
+	end)
+
+	-- Update model preview window visibility
+	updateModelFrame()
 
 	local whiteFont = CreateFont("GameFontNormalHugeWhite")
 	whiteFont:CopyFontObject(GameFontNormalHuge)
