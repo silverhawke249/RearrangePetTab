@@ -3,5 +3,6 @@
 ## Author: Silverhawke
 ## Notes: Rearranges the pet tab to a list form
 ## Version: 1.0
+## SavedVariables: RearrangePetTab_Settings
 
 RearrangePetTab.lua

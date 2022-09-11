@@ -49,6 +49,15 @@ local function setButtonText()
 end
 
 local eventHandler = {}
+eventHandler.ADDON_LOADED = function(name)
+	if name ~= "RearrangePetTab" then return end
+
+	-- Initialize settings
+	RearrangePetTab_Settings = RearrangePetTab_Settings or {}
+
+	-- Default settings
+	RearrangePetTab_Settings.showPreview = RearrangePetTab_Settings.showPreview or true
+end
 eventHandler.PLAYER_ENTERING_WORLD = function()
 	-- Rearrange UI elements
 	CompanionSummonButton:Hide()
@@ -163,9 +172,10 @@ end
 
 if WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC then
 	local f = CreateFrame("Frame")
-	f:RegisterEvent("PLAYER_ENTERING_WORLD")
+	f:RegisterEvent("ADDON_LOADED")
 	f:RegisterEvent("COMPANION_UPDATE")
 	f:RegisterEvent("COMPANION_LEARNED")
 	f:RegisterEvent("COMPANION_UNLEARNED")
+	f:RegisterEvent("PLAYER_ENTERING_WORLD")
 	f:SetScript("OnEvent", handleEvents)
 end
