@@ -79,6 +79,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 		end
 	end)
 
+	-- Rearrange the page
 	for i = 1, 12 do
 		local thisButton = _G["CompanionButton"..i]
 
@@ -101,7 +102,9 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	end
 
 	-- Set background (unless ElvUI is active)
-	if ElvUI == nil then
+	if ElvUI then
+		CompanionPageNumber:SetPoint("CENTER", PetPaperDollFrameCompanionFrame, "CENTER", -13, -164)
+	else
 		local topLeft = PetPaperDollFrameCompanionFrame:CreateTexture(nil, "BACKGROUND")
 		local topRight = PetPaperDollFrameCompanionFrame:CreateTexture(nil, "BACKGROUND")
 		local bottomLeft = PetPaperDollFrameCompanionFrame:CreateTexture(nil, "BACKGROUND")
@@ -112,15 +115,13 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 		bottomLeft:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomLeft")
 		bottomRight:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomRight")
 
-		topLeft:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 0, 0)
-		topRight:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 255, 0)
-		bottomLeft:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 0, -255)
-		bottomRight:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 255, -255)
+		topLeft:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 2, -1)
+		topRight:SetPoint("TOPLEFT", topLeft, "TOPRIGHT", 0, 0)
+		bottomLeft:SetPoint("TOPLEFT", topLeft, "BOTTOMLEFT", 0, 0)
+		bottomRight:SetPoint("TOPLEFT", topLeft, "BOTTOMRIGHT", 0, 0)
 
 		-- Why is it slightly off?
 		CompanionPageNumber:SetPoint("CENTER", PetPaperDollFrameCompanionFrame, "CENTER", -13, -158)
-	else
-		CompanionPageNumber:SetPoint("CENTER", PetPaperDollFrameCompanionFrame, "CENTER", -13, -164)
 	end
 
 	-- Reparent window title (would probably break once battle pets are a thing)
