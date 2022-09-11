@@ -50,16 +50,21 @@ end
 
 local eventHandler = {}
 eventHandler.PLAYER_ENTERING_WORLD = function()
-	-- Hide UI elements
-	CompanionModelFrame:Hide()
+	-- Rearrange UI elements
 	CompanionSummonButton:Hide()
 	CompanionSelectedName:Hide()
 	for i = 1, PetPaperDollFrameCompanionFrame:GetNumRegions() do
 		local region = select(i, PetPaperDollFrameCompanionFrame:GetRegions())
 		if (region:GetObjectType() == "Texture") then
-			region:Hide()
+			if region:GetPoint(1) == "CENTER" then
+				region:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
+			else
+				region:Hide()
+			end
 		end
 	end
+	CompanionModelFrame:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 370, -114)
+	CompanionModelFrameRotateLeftButton:SetPoint("TOPLEFT", CompanionModelFrame, "TOPLEFT", -3, 25)
 
 	local whiteFont = CreateFont("GameFontNormalHugeWhite")
 	whiteFont:CopyFontObject(GameFontNormalHuge)
