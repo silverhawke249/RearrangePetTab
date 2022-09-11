@@ -126,6 +126,19 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	-- Reparent window title (would probably break once battle pets are a thing)
 	PetNameText:SetParent(PetPaperDollFrameCompanionFrame)
 
+	-- Rename tab if there's no companions, also change the tooltip
+	-- This is gonna require localization... but let's not enable this for now
+	--[[
+	if GetNumCompanions("CRITTER") == 0 then
+		CharacterFrameTab2Text:SetText("Mounts")
+	end
+	CharacterFrameTab2:HookScript("OnEnter", function()
+		local tooltipText = GameTooltipTextLeft1:GetText()
+		GameTooltipTextLeft1:SetText(tooltipText:gsub("Pet", "Mounts"))
+		GameTooltip:Show()
+	end)
+	]]--
+
 	-- Hook script
 	PetPaperDollFrameCompanionFrame:HookScript("OnShow", setButtonText)
 	PetPaperDollFrameTab2:HookScript("OnClick", setButtonText)
