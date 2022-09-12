@@ -9,7 +9,7 @@ On top of that, it also allows you to use the mouse wheel to scroll through the 
 
 This addon is only tested on stock UI and ElvUI.
 
-![Preview of addon in action.](https://silverhawke.s-ul.eu/9eLcjslI)
+![Preview of addon in action.](https://silverhawke.s-ul.eu/f64EJou1)
 
 ## Installing
 - Download latest release and extract in `_classic_/Interface/AddOns/`,
