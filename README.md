@@ -18,6 +18,8 @@ This addon is only tested on stock UI and ElvUI.
 ## Changelog
 - 1.0
   - Initial release.
+- 1.1
+  - Bug fixes, add pet/mount preview frame, integrate addon with ElvUI (thanks Aeryn!)
 
 ## Disclaimer
 This software is provided as-is, without warranty of any kind, express or implied.
