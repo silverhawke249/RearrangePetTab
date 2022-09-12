@@ -93,6 +93,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
         local backdrop = CreateFrame("Frame", "CompanionModelBackgroundFrame", CompanionModelFrame)
         backdrop:SetSize(unpack(frameSize))
         backdrop:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
+        backdrop:SetFrameLevel(CompanionModelFrame:GetFrameLevel() - 1)
         ElvUISkin:HandleFrame(backdrop)
     end
 
