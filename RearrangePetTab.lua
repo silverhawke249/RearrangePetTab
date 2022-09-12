@@ -1,3 +1,6 @@
+local hasElvUI = (ElvUI ~= nil)
+local ElvUISkin = hasElvUI and ElvUI[1]:GetModule('Skins') or nil
+
 local function setLabelColor()
 	for i = 1, 12 do
 		local thisButton = _G["CompanionButton"..i]
@@ -70,10 +73,12 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	-- Rearrange UI elements
 	CompanionSummonButton:Hide()
 	CompanionSelectedName:Hide()
+	local frameSize = nil
 	for i = PetPaperDollFrameCompanionFrame:GetNumRegions(), 1, -1 do
 		local region = select(i, PetPaperDollFrameCompanionFrame:GetRegions())
-		if (region:GetObjectType() == "Texture") then
+		if region:GetObjectType() == "Texture" then
 			if region:GetPoint(1) == "CENTER" then
+				frameSize = { region:GetSize() }
 				region:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
 				region:SetParent(CompanionModelFrame)
 			else
@@ -83,15 +88,22 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	end
 	CompanionModelFrame:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 370, -114)
 	CompanionModelFrameRotateLeftButton:SetPoint("TOPLEFT", CompanionModelFrame, "TOPLEFT", -3, 25)
+	-- Create background frame for ElvUI
+	if hasElvUI then
+		local backdrop = CreateFrame("Frame", "CompanionModelBackgroundFrame", CompanionModelFrame)
+		backdrop:SetSize(unpack(frameSize))
+		backdrop:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
+		ElvUISkin:HandleFrame(backdrop)
+	end
 
 	-- Introduce check button
 	local checkButton = CreateFrame(
 		"CheckButton",
 		"CompanionModelCheckButton",
 		PetPaperDollFrameCompanionFrame,
-		"ChatConfigCheckButtonTemplate"
+		"InterfaceOptionsSmallCheckButtonTemplate"
 	)
-	checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -50)
+	checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -47)
 	checkButton:SetChecked(RearrangePetTab_Settings.showPreview)
 	local checkButtonText = _G["CompanionModelCheckButtonText"]
 	checkButtonText:SetText("Preview")
@@ -99,6 +111,11 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 		RearrangePetTab_Settings.showPreview = not RearrangePetTab_Settings.showPreview
 		updateModelFrame()
 	end)
+	-- Handle checkbox for ElvUI
+	if hasElvUI then
+		checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -40)
+		ElvUISkin:HandleCheckBox(checkButton)
+	end
 
 	-- Update model preview window visibility
 	updateModelFrame()
@@ -144,7 +161,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
 	end
 
 	-- Set background (unless ElvUI is active)
-	if ElvUI then
+	if hasElvUI then
 		CompanionPageNumber:SetPoint("CENTER", PetPaperDollFrameCompanionFrame, "CENTER", -13, -164)
 	else
 		local topLeft = PetPaperDollFrameCompanionFrame:CreateTexture(nil, "BACKGROUND")
