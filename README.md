@@ -20,6 +20,8 @@ This addon is only tested on stock UI and ElvUI.
   - Initial release.
 - 1.1
   - Bug fixes, add pet/mount preview frame, integrate addon with ElvUI (thanks Aeryn!)
+- 1.2
+  - Preview checkbox moved to the bottom of the frame to avoid overlap with tabs
 
 ## Disclaimer
 This software is provided as-is, without warranty of any kind, express or implied.
