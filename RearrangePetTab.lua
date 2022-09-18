@@ -104,7 +104,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
         PetPaperDollFrameCompanionFrame,
         "InterfaceOptionsSmallCheckButtonTemplate"
     )
-    checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -47)
+    checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 260, -401)
     checkButton:SetChecked(RearrangePetTab_Settings.showPreview)
     local checkButtonText = _G["CompanionModelCheckButtonText"]
     checkButtonText:SetText("Preview")
@@ -114,7 +114,7 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
     end)
     -- Handle checkbox for ElvUI
     if hasElvUI then
-        checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 250, -40)
+        checkButton:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 260, -394)
         ElvUISkin:HandleCheckBox(checkButton)
     end
 
