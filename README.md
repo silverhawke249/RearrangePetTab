@@ -4,12 +4,13 @@ A WoW WotLK Classic add-on that rearranges the pet frame.
 The default companion/mount interface is simply too clunky, as many collectables have the same icon,
 and having to click them to find out what they are, is simply too cumbersome.
 
-This addon removes the model display in exchange for displaying the companions and mounts in a list form.
-On top of that, it also allows you to use the mouse wheel to scroll through the pages.
+This addon moves the model display out of the companion frame in exchange for displaying the companions
+and mounts in a list form. The model display visibility may be toggled. On top of that, it also allows
+you to use the mouse wheel to scroll through the pages.
 
 This addon is only tested on stock UI and ElvUI.
 
-![Preview of addon in action.](https://silverhawke.s-ul.eu/f64EJou1)
+![Preview of addon in action.](https://silverhawke.s-ul.eu/X2ZjQ0PB)
 
 ## Installing
 - Download latest release and extract in `_classic_/Interface/AddOns/`,
