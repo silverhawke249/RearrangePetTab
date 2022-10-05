@@ -73,12 +73,10 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
     -- Rearrange UI elements
     CompanionSummonButton:Hide()
     CompanionSelectedName:Hide()
-    local frameSize = nil
     for i = PetPaperDollFrameCompanionFrame:GetNumRegions(), 1, -1 do
         local region = select(i, PetPaperDollFrameCompanionFrame:GetRegions())
         if region:GetObjectType() == "Texture" then
             if region:GetPoint(1) == "CENTER" then
-                frameSize = { region:GetSize() }
                 region:SetPoint("CENTER", CompanionModelFrame, "CENTER", 0, 0)
                 region:SetParent(CompanionModelFrame)
             else
@@ -88,7 +86,9 @@ eventHandler.PLAYER_ENTERING_WORLD = function()
     end
     CompanionModelFrame:SetPoint("TOPLEFT", PetPaperDollFrameCompanionFrame, "TOPLEFT", 370, -114)
     CompanionModelFrameRotateLeftButton:SetPoint("TOPLEFT", CompanionModelFrame, "TOPLEFT", -3, 25)
+    
     -- Create background frame for ElvUI
+    local frameSize = { 320, 235 }  -- Might as well hardcode it
     if hasElvUI then
         local backdrop = CreateFrame("Frame", "CompanionModelBackgroundFrame", CompanionModelFrame)
         backdrop:SetSize(unpack(frameSize))
