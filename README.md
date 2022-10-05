@@ -16,6 +16,9 @@ This addon is only tested on stock UI and ElvUI.
 - Download latest release and extract in `_classic_/Interface/AddOns/`,
 - or clone the repository into `_classic_/Interface/AddOns/RearrangePetTab/`.
 
+## Known issues
+- A Lua error occurs if character frame is opened during combat.
+
 ## Changelog
 - 1.0
   - Initial release.
@@ -23,6 +26,8 @@ This addon is only tested on stock UI and ElvUI.
   - Bug fixes, add pet/mount preview frame, integrate addon with ElvUI (thanks Aeryn!)
 - 1.2
   - Preview checkbox moved to the bottom of the frame to avoid overlap with tabs
+- 1.3
+  - Hardcoded backdrop frame size to avoid nil frame size
 
 ## Disclaimer
 This software is provided as-is, without warranty of any kind, express or implied.
